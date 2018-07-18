@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://localhost:27017/zhipin_test");
+mongoose.connect("mongodb://localhost:27017/zhipin");
 
 mongoose.connection.on("connected",function (){
   console.log("数据库连接成功!")
@@ -14,14 +14,14 @@ const UserSchema = mongoose.Schema({
     type:{type:String}
 });
 // 2.2. 定义Model(与集合对应, 可以操作集合)
-const UserModel = mongoose.model("users",UserSchema);
-
+// const UserModel = mongoose.model("users",UserSchema);
 // 3. 通过Model或其实例对集合数据进行CRUD操作
 // 3.1. 通过Model实例的save()添加数据
 function testSave(){
   let userModel = new UserModel({
       username : "Tom",
-      password:"123456"
+      password:"123456",
+      type:"dashen"
   });
    userModel.save(function(error,user){
      console.log(error,user)
@@ -54,4 +54,4 @@ function testRemove(){
         console.log("update",error,data)
     })
 }
-testRemove(); //{ ok: 1, n: 1 }
+// testRemove(); //{ ok: 1, n: 1 }
